@@ -10,7 +10,7 @@ public class GameFrame extends JFrame{
 
 
         this.setTitle("Mouse");
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setResizable(false);
         this.pack();
         this.setVisible(true);

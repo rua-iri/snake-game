@@ -1,12 +1,10 @@
 import javax.swing.JPanel;
 import javax.swing.Timer;
-import javax.swing.text.AttributeSet.ColorAttribute;
 
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.event.KeyAdapter;
@@ -170,7 +168,7 @@ public class GamePanel extends JPanel implements ActionListener {
         FontMetrics metrics2 = getFontMetrics(g.getFont());
         g.drawString(gaOvText, (SCREEN_WIDTH - metrics2.stringWidth(gaOvText)) / 2, SCREEN_HEIGHT / 2);
 
-        super.paint(g);
+        
 
     }
 
@@ -216,9 +214,6 @@ public class GamePanel extends JPanel implements ActionListener {
                         direction = 'U';
                     }
                     break;
-                case KeyEvent.VK_ENTER:
-                    //TODO restart game here
-
             }
 
         }
