@@ -1,8 +1,10 @@
+import java.awt.event.WindowEvent;
+
 public class SnakeGame {
 
     public static void main(String[] args) {
 
-        new GameFrame();
+        GameFrame gFrame = new GameFrame();
 
     }
 }

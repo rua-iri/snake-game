@@ -1,9 +1,13 @@
 import javax.swing.JPanel;
 import javax.swing.Timer;
+import javax.swing.text.AttributeSet.ColorAttribute;
+
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -62,25 +66,29 @@ public class GamePanel extends JPanel implements ActionListener {
 
     public void draw(Graphics g) {
 
-        for (int i = 0; i < (SCREEN_HEIGHT / UNIT_SIZE); i++) {
-            g.drawLine(i * UNIT_SIZE, 0, i * UNIT_SIZE, SCREEN_HEIGHT);
-            g.drawLine(0, i * UNIT_SIZE, SCREEN_WIDTH, i * UNIT_SIZE);
-        }
+        if (running) {
 
-        g.setColor(Color.yellow);
-        g.fillOval(cheeseX, cheeseY, UNIT_SIZE, UNIT_SIZE);
-
-        for (int i = 0; i < bodyParts; i++) {
-
-            if (i == 0) {
-                g.setColor(new Color(180, 140, 159));
-                g.fillRect(x[i], y[i], UNIT_SIZE, UNIT_SIZE);
-            } else {
-                g.setColor(new Color(119, 119, 119));
-                g.fillRect(x[i], y[i], UNIT_SIZE, UNIT_SIZE);
+            for (int i = 0; i < (SCREEN_HEIGHT / UNIT_SIZE); i++) {
+                g.drawLine(i * UNIT_SIZE, 0, i * UNIT_SIZE, SCREEN_HEIGHT);
+                g.drawLine(0, i * UNIT_SIZE, SCREEN_WIDTH, i * UNIT_SIZE);
             }
-        }
 
+            g.setColor(Color.yellow);
+            g.fillOval(cheeseX, cheeseY, UNIT_SIZE, UNIT_SIZE);
+
+            for (int i = 0; i < bodyParts; i++) {
+
+                if (i == 0) {
+                    g.setColor(new Color(180, 140, 159));
+                    g.fillRect(x[i], y[i], UNIT_SIZE, UNIT_SIZE);
+                } else {
+                    g.setColor(new Color(119, 119, 119));
+                    g.fillRect(x[i], y[i], UNIT_SIZE, UNIT_SIZE);
+                }
+            }
+        } else {
+            gameOver(g);
+        }
     }
 
     public void genCheese() {
@@ -151,6 +159,19 @@ public class GamePanel extends JPanel implements ActionListener {
 
     public void gameOver(Graphics g) {
 
+        String scoreText = "Score: " + cheeseEaten;
+        String gaOvText = "Game Over";
+
+        g.setColor(Color.red);
+        FontMetrics metrics1 = getFontMetrics(g.getFont());
+        g.drawString((scoreText), (SCREEN_WIDTH - metrics1.stringWidth(scoreText)) / 2, g.getFont().getSize());
+
+        g.setColor(Color.red);
+        FontMetrics metrics2 = getFontMetrics(g.getFont());
+        g.drawString(gaOvText, (SCREEN_WIDTH - metrics2.stringWidth(gaOvText)) / 2, SCREEN_HEIGHT / 2);
+
+        super.paint(g);
+
     }
 
     @Override
@@ -195,6 +216,8 @@ public class GamePanel extends JPanel implements ActionListener {
                         direction = 'U';
                     }
                     break;
+                case KeyEvent.VK_ENTER:
+                    //TODO restart game here
 
             }
 
