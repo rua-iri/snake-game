@@ -170,7 +170,9 @@ public class GamePanel extends JPanel implements ActionListener {
         FontMetrics metrics2 = getFontMetrics(g.getFont());
         g.drawString(gaOvText, (SCREEN_WIDTH - metrics2.stringWidth(gaOvText)) / 2, SCREEN_HEIGHT / 2);
 
-        
+        CloseFrame cFrame = new CloseFrame();
+        cFrame.start();
+
 
     }
 
